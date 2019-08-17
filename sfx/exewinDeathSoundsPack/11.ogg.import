@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/11.ogg-17eea0427c2849ff5354f8fd967d66cb.oggstr"
+
+[deps]
+
+source_file="res://sfx/exewinDeathSoundsPack/11.ogg"
+dest_files=[ "res://.import/11.ogg-17eea0427c2849ff5354f8fd967d66cb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

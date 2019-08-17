@@ -15,3 +15,4 @@ func _unhandled_key_input(event):
 		if State.splits_rem > 0:
 			State.splits_rem -= 1
 			get_tree().call_group("Chars", "split")
+			$Duplicate.play(0)
