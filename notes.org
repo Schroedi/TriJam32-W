@@ -1,0 +1,4 @@
+* W
+** TODO auto move right
+** TODO death
+** TODO split
