@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/area_2d.svg-d492c02c5087daaf8500232847c191d4.stex"
+path="res://.import/gold.png-a954b7100c5ac4240f5e06d00c89ce59.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/camera_limiter/area_2d.svg"
-dest_files=[ "res://.import/area_2d.svg-d492c02c5087daaf8500232847c191d4.stex" ]
+source_file="res://gfx/gold.png"
+dest_files=[ "res://.import/gold.png-a954b7100c5ac4240f5e06d00c89ce59.stex" ]
 
 [params]
 

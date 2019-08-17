@@ -1,134 +1,132 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://addons/camera_limiter/focus_limiter.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://addons/camera_limiter/node.svg" type="Texture" id=3]
-[ext_resource path="res://pressed.png" type="Texture" id=4]
-[ext_resource path="res://addons/camera_limiter/camera_limiting_area.gd" type="Script" id=5]
-[ext_resource path="res://addons/camera_limiter/area_2d.svg" type="Texture" id=6]
-[ext_resource path="res://Player.gd" type="Script" id=7]
-[ext_resource path="res://DeathZone.gd" type="Script" id=8]
-[ext_resource path="res://UI.gd" type="Script" id=9]
-[ext_resource path="res://sfx/flame.ogg" type="AudioStream" id=10]
-[ext_resource path="res://Scenes/Powerup.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Char.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/LineFloor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Game.gd" type="Script" id=3]
+[ext_resource path="res://Player.gd" type="Script" id=6]
+[ext_resource path="res://font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://GameOver.gd" type="Script" id=8]
+[ext_resource path="res://sfx/flame.ogg" type="AudioStream" id=9]
+[ext_resource path="res://UI.gd" type="Script" id=11]
+[ext_resource path="res://icon.png" type="Texture" id=12]
+[ext_resource path="res://pressed.png" type="Texture" id=13]
+[ext_resource path="res://Zoom.gd" type="Script" id=15]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 527.52, 315.169 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10.6009, 11.2321 )
-
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64.65, 64 )
 
-[node name="Node2D" type="Node2D"]
-
-[node name="Level" type="Node2D" parent="."]
-
-[node name="LineFloor" parent="Level" instance=ExtResource( 13 )]
-position = Vector2( 308.005, 275.151 )
-scale = Vector2( 2.96, 1 )
-
-[node name="LineFloor2" parent="Level" instance=ExtResource( 13 )]
-position = Vector2( 1170.42, 275.151 )
-scale = Vector2( 2.96, 1 )
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Chars" type="Node2D" parent="."]
+position = Vector2( 54.1354, 194.975 )
 
-[node name="Char" parent="Chars" instance=ExtResource( 12 )]
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource( 6 )
 
-[node name="CameraLimitArea" type="Area2D" parent="."]
-collision_layer = 0
-script = ExtResource( 5 )
-__meta__ = {
-"_editor_icon": ExtResource( 6 )
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimitArea"]
-position = Vector2( 500.921, 289.964 )
-shape = SubResource( 4 )
-
-[node name="limit_left" type="Position2D" parent="CameraLimitArea"]
-position = Vector2( 0, 261.456 )
-
-[node name="limit_buttom" type="Position2D" parent="CameraLimitArea"]
-position = Vector2( 463.453, 600.29 )
-
-[node name="Player" type="Node2D" parent="CameraLimitArea"]
-script = ExtResource( 7 )
-
-[node name="Camera2D" type="Camera2D" parent="CameraLimitArea/Player"]
-position = Vector2( 370.885, 187.163 )
+[node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 1.21, 1 )
+script = ExtResource( 15 )
 
-[node name="CameraLimiter" type="Node" parent="CameraLimitArea/Player/Camera2D"]
-script = ExtResource( 1 )
-__meta__ = {
-"_editor_icon": ExtResource( 3 )
-}
-
-[node name="Duplicate" type="AudioStreamPlayer" parent="CameraLimitArea/Player"]
-stream = ExtResource( 10 )
-
-[node name="DeathZone" type="Area2D" parent="."]
-position = Vector2( 36.9098, -79.9712 )
-script = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2( 438.509, 513.488 )
-shape = SubResource( 5 )
-
-[node name="Powerup" parent="." instance=ExtResource( 11 )]
+[node name="Duplicate" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 9 )
 
 [node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
 [node name="Panel" type="Panel" parent="UI"]
-margin_right = 256.0
-margin_bottom = 40.0
+margin_right = 166.34
+margin_bottom = 282.74
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/Panel"]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="GridContainer" type="GridContainer" parent="UI/Panel"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 183.0
+margin_bottom = 278.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Panel/GridContainer"]
+margin_right = 93.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 7 )
 text = "Us"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Us" type="Label" parent="UI/Panel"]
-anchor_left = 0.0390625
-anchor_right = 0.0390625
-margin_left = 30.0
-margin_right = 70.0
-margin_bottom = 14.0
+[node name="Us" type="Label" parent="UI/Panel/GridContainer"]
+margin_left = 97.0
+margin_right = 139.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 7 )
 text = "42"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Label2" type="Label" parent="UI/Panel"]
-anchor_top = 0.35
-anchor_bottom = 0.35
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="Label2" type="Label" parent="UI/Panel/GridContainer"]
+margin_top = 68.0
+margin_right = 93.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 7 )
 text = "Splits"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Splits" type="Label" parent="UI/Panel"]
-anchor_left = 0.0390625
-anchor_top = 0.35
-anchor_right = 0.0390625
-anchor_bottom = 0.35
-margin_left = 30.0
-margin_right = 70.0
-margin_bottom = 14.0
+[node name="Splits" type="Label" parent="UI/Panel/GridContainer"]
+margin_left = 97.0
+margin_top = 68.0
+margin_right = 139.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 7 )
+text = "42"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label3" type="Label" parent="UI/Panel/GridContainer"]
+margin_top = 136.0
+margin_right = 93.0
+margin_bottom = 200.0
+custom_fonts/font = ExtResource( 7 )
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Goal" type="Label" parent="UI/Panel/GridContainer"]
+margin_left = 97.0
+margin_top = 136.0
+margin_right = 139.0
+margin_bottom = 200.0
+custom_fonts/font = ExtResource( 7 )
+text = "42"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label4" type="Label" parent="UI/Panel/GridContainer"]
+margin_top = 204.0
+margin_right = 93.0
+margin_bottom = 268.0
+custom_fonts/font = ExtResource( 7 )
+text = "Level"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Level" type="Label" parent="UI/Panel/GridContainer"]
+margin_left = 97.0
+margin_top = 204.0
+margin_right = 139.0
+margin_bottom = 268.0
+custom_fonts/font = ExtResource( 7 )
 text = "42"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -136,9 +134,62 @@ __meta__ = {
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="UI"]
 position = Vector2( 17.9639, 345.226 )
-normal = ExtResource( 2 )
-pressed = ExtResource( 4 )
-shape = SubResource( 6 )
+normal = ExtResource( 12 )
+pressed = ExtResource( 13 )
+shape = SubResource( 2 )
 action = "key_split"
 visibility_mode = 1
-[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_DeathZone_body_entered"]
+
+[node name="GameOver" type="Panel" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -286.025
+margin_top = -81.925
+margin_right = 286.025
+margin_bottom = 81.925
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -209.0
+margin_top = -69.0
+margin_right = 209.0
+margin_bottom = 73.0
+
+[node name="Label" type="Label" parent="UI/GameOver/VBoxContainer"]
+margin_right = 418.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 7 )
+text = "You finished with x clones"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameOver/VBoxContainer"]
+margin_top = 68.0
+margin_right = 418.0
+margin_bottom = 138.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Again" type="Button" parent="UI/GameOver/VBoxContainer/HBoxContainer"]
+margin_left = 29.0
+margin_right = 190.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 7 )
+text = "Try again"
+
+[node name="Next" type="Button" parent="UI/GameOver/VBoxContainer/HBoxContainer"]
+margin_left = 210.0
+margin_right = 389.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 7 )
+text = "Next Level"
+[connection signal="pressed" from="UI/GameOver/VBoxContainer/HBoxContainer/Again" to="." method="_on_Again_pressed"]
+[connection signal="pressed" from="UI/GameOver/VBoxContainer/HBoxContainer/Next" to="." method="_on_Next_pressed"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/node.svg-950140264c191b3803350bb48b11dbe5.stex"
+path="res://.import/blue.png-46e886afa2e6bf2dcbfe4de7d4436f90.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/camera_limiter/node.svg"
-dest_files=[ "res://.import/node.svg-950140264c191b3803350bb48b11dbe5.stex" ]
+source_file="res://gfx/blue.png"
+dest_files=[ "res://.import/blue.png-46e886afa2e6bf2dcbfe4de7d4436f90.stex" ]
 
 [params]
 

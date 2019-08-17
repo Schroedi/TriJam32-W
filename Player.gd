@@ -2,13 +2,8 @@ extends Node2D
 
 
 func _process(delta):
-	# follow the leader
-	var x = 0
-	for c in get_node("../../Chars").get_children():
-		var ci:Node2D = c
-		x = max(x, ci.position.x)
-	position.x = x
-
+	if State.in_goal == State.chars:
+		get_node("../UI/GameOver").game_over()
 
 func _unhandled_key_input(event):
 	if Input.is_action_pressed("key_split"):

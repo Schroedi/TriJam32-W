@@ -1,4 +1,5 @@
 * W
-** TODO auto move right
-** TODO death
-** TODO split
+** DONE auto move right
+** DONE death
+** DONE split
+** TODO no split sound if nothing is split
