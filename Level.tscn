@@ -3,21 +3,16 @@
 [ext_resource path="res://addons/camera_limiter/focus_limiter.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://addons/camera_limiter/node.svg" type="Texture" id=3]
-[ext_resource path="res://Char.gd" type="Script" id=4]
+[ext_resource path="res://pressed.png" type="Texture" id=4]
 [ext_resource path="res://addons/camera_limiter/camera_limiting_area.gd" type="Script" id=5]
 [ext_resource path="res://addons/camera_limiter/area_2d.svg" type="Texture" id=6]
 [ext_resource path="res://Player.gd" type="Script" id=7]
 [ext_resource path="res://DeathZone.gd" type="Script" id=8]
 [ext_resource path="res://UI.gd" type="Script" id=9]
 [ext_resource path="res://sfx/flame.ogg" type="AudioStream" id=10]
-[ext_resource path="res://sfx/exewinDeathSoundsPack/1.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Powerup.gd" type="Script" id=12]
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 109.079, 10 )
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 20.0
+[ext_resource path="res://Scenes/Powerup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Char.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/LineFloor.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 527.52, 315.169 )
@@ -25,57 +20,24 @@ extents = Vector2( 527.52, 315.169 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10.6009, 11.2321 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 64.65, 64 )
+
 [node name="Node2D" type="Node2D"]
 
-[node name="BG" type="Sprite" parent="."]
-position = Vector2( 3262.75, 1140.97 )
-scale = Vector2( 52.8279, 19.5741 )
-texture = ExtResource( 2 )
+[node name="Level" type="Node2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 400.044, 283.977 )
-scale = Vector2( 4.17, 1 )
+[node name="LineFloor" parent="Level" instance=ExtResource( 13 )]
+position = Vector2( 308.005, 275.151 )
+scale = Vector2( 2.96, 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
-position = Vector2( -0.00534248, -0.0637174 )
-scale = Vector2( 1.70473, 0.155258 )
-texture = ExtResource( 2 )
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2( 1432.57, 283.977 )
-scale = Vector2( 4.17, 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
-position = Vector2( -0.00534248, -0.0637174 )
-scale = Vector2( 1.70473, 0.155258 )
-texture = ExtResource( 2 )
+[node name="LineFloor2" parent="Level" instance=ExtResource( 13 )]
+position = Vector2( 1170.42, 275.151 )
+scale = Vector2( 2.96, 1 )
 
 [node name="Chars" type="Node2D" parent="."]
 
-[node name="Char" type="RigidBody2D" parent="Chars" groups=[
-"Chars",
-]]
-position = Vector2( 370.885, 187.163 )
-linear_velocity = Vector2( 100, 0 )
-linear_damp = 0.0
-applied_force = Vector2( 100, 0 )
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chars/Char"]
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Chars/Char"]
-scale = Vector2( 0.283353, 0.283353 )
-texture = ExtResource( 2 )
-
-[node name="Die" type="AudioStreamPlayer" parent="Chars/Char"]
-stream = ExtResource( 11 )
+[node name="Char" parent="Chars" instance=ExtResource( 12 )]
 
 [node name="CameraLimitArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -118,16 +80,7 @@ script = ExtResource( 8 )
 position = Vector2( 438.509, 513.488 )
 shape = SubResource( 5 )
 
-[node name="Powerup" type="Area2D" parent="."]
-position = Vector2( 639.782, 233.885 )
-script = ExtResource( 12 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup"]
-shape = SubResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="Powerup"]
-scale = Vector2( 0.16, 0.16 )
-texture = ExtResource( 2 )
+[node name="Powerup" parent="." instance=ExtResource( 11 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 9 )
@@ -180,6 +133,12 @@ text = "42"
 __meta__ = {
 "_edit_use_anchors_": true
 }
-[connection signal="finished" from="Chars/Char/Die" to="Chars/Char" method="_on_Die_finished"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UI"]
+position = Vector2( 17.9639, 345.226 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 4 )
+shape = SubResource( 6 )
+action = "key_split"
+visibility_mode = 1
 [connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_DeathZone_body_entered"]
-[connection signal="body_entered" from="Powerup" to="Powerup" method="_on_Powerup_body_entered"]
