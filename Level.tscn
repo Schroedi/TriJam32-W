@@ -1,0 +1,163 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/camera_limiter/focus_limiter.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/camera_limiter/node.svg" type="Texture" id=3]
+[ext_resource path="res://Char.gd" type="Script" id=4]
+[ext_resource path="res://addons/camera_limiter/camera_limiting_area.gd" type="Script" id=5]
+[ext_resource path="res://addons/camera_limiter/area_2d.svg" type="Texture" id=6]
+[ext_resource path="res://Player.gd" type="Script" id=7]
+[ext_resource path="res://DeathZone.gd" type="Script" id=8]
+[ext_resource path="res://UI.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 109.079, 10 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 527.52, 315.169 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 3134.27, 77.4531 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BG" type="Sprite" parent="."]
+position = Vector2( 3262.75, 1140.97 )
+scale = Vector2( 52.8279, 19.5741 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 400.044, 283.977 )
+scale = Vector2( 4.17, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+position = Vector2( -0.00534248, -0.0637174 )
+scale = Vector2( 1.70473, 0.155258 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 1432.57, 283.977 )
+scale = Vector2( 4.17, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+position = Vector2( -0.00534248, -0.0637174 )
+scale = Vector2( 1.70473, 0.155258 )
+texture = ExtResource( 2 )
+
+[node name="Chars" type="Node2D" parent="."]
+
+[node name="Char" type="RigidBody2D" parent="Chars" groups=[
+"Chars",
+]]
+position = Vector2( 370.885, 187.163 )
+linear_velocity = Vector2( 100, 0 )
+linear_damp = 0.0
+applied_force = Vector2( 100, 0 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chars/Char"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Chars/Char"]
+scale = Vector2( 0.283353, 0.283353 )
+texture = ExtResource( 2 )
+
+[node name="CameraLimitArea" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimitArea"]
+position = Vector2( 500.921, 289.964 )
+shape = SubResource( 4 )
+
+[node name="limit_left" type="Position2D" parent="CameraLimitArea"]
+position = Vector2( 0, 261.456 )
+
+[node name="limit_buttom" type="Position2D" parent="CameraLimitArea"]
+position = Vector2( 463.453, 600.29 )
+
+[node name="Player" type="Node2D" parent="CameraLimitArea"]
+script = ExtResource( 7 )
+
+[node name="Camera2D" type="Camera2D" parent="CameraLimitArea/Player"]
+position = Vector2( 370.885, 187.163 )
+current = true
+
+[node name="CameraLimiter" type="Node" parent="CameraLimitArea/Player/Camera2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 3 )
+}
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 36.9098, -79.9712 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 438.509, 513.488 )
+shape = SubResource( 5 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+
+[node name="Panel" type="Panel" parent="UI"]
+margin_right = 256.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="UI/Panel"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Us"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Us" type="Label" parent="UI/Panel"]
+anchor_left = 0.0390625
+anchor_right = 0.0390625
+margin_left = 30.0
+margin_right = 70.0
+margin_bottom = 14.0
+text = "42"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label2" type="Label" parent="UI/Panel"]
+anchor_top = 0.35
+anchor_bottom = 0.35
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Splits"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Splits" type="Label" parent="UI/Panel"]
+anchor_left = 0.0390625
+anchor_top = 0.35
+anchor_right = 0.0390625
+anchor_bottom = 0.35
+margin_left = 30.0
+margin_right = 70.0
+margin_bottom = 14.0
+text = "42"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_DeathZone_body_entered"]
