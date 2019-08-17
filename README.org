@@ -1,0 +1,11 @@
+** Goal
+Reach the goal with as many copies of yourself as possible.
+
+** About
+- This game was created in 3 hours for https://itch.io/jam/trijam-32/
+- The submission is here: https://itch.io/jam/trijam-32/rate/470191
+
+** Used resources
+- Split sound: https://opengameart.org/content/catching-fire
+- Death sound: https://opengameart.org/content/death-sounds-0
+- Camera zoom based on: https://godotengine.org/qa/38035/camera-based-player-position-screen-while-keeping-objects

@@ -30,7 +30,7 @@ window/size/height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray( "camera_limiter" )
+enabled=PoolStringArray(  )
 
 [input]
 
