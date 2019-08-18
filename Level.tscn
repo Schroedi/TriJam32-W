@@ -6,8 +6,8 @@
 [ext_resource path="res://sfx/flame.ogg" type="AudioStream" id=4]
 [ext_resource path="res://UI.gd" type="Script" id=5]
 [ext_resource path="res://font.tres" type="DynamicFont" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
-[ext_resource path="res://pressed.png" type="Texture" id=8]
+[ext_resource path="res://gfx/Button.png" type="Texture" id=7]
+[ext_resource path="res://gfx/Button_down.png" type="Texture" id=8]
 [ext_resource path="res://GameOver.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -133,7 +133,7 @@ __meta__ = {
 }
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="UI"]
-position = Vector2( 17.9639, 345.226 )
+position = Vector2( 1710.69, 869.777 )
 normal = ExtResource( 7 )
 pressed = ExtResource( 8 )
 shape = SubResource( 1 )
